@@ -2,7 +2,7 @@ package com.jjs.memoboard.Service.Impl;
 
 
 import com.jjs.memoboard.Domain.User;
-import com.jjs.memoboard.Dto.UserResponseDto;
+import com.jjs.memoboard.Dto.UserDto;
 import com.jjs.memoboard.Repository.UserRepository;
 import com.jjs.memoboard.Service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +24,27 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public UserResponseDto.Response findUserProfile(Long userId){
+    public UserDto.Response findUserProfile(Long userId){
         User user = findUser(userId);
-        UserResponseDto.Response userDto = new UserResponseDto.Response(user);
+        UserDto.Response userDto = new UserDto.Response(user);
         return userDto;
+    }
+
+    @Transactional
+    @Override
+    public UserDto.saveUserInfoResponse saveUserInfo(UserDto.saveRequest userInfo){
+
+        User user = User.builder()
+                .name(userInfo.getName())
+                .email(userInfo.getEmail())
+                .build();
+
+        User savedUser = userRepository.save(user);
+
+        UserDto.Response userResponseDto = new UserDto.Response(savedUser);
+
+        return UserDto.saveUserInfoResponse.builder()
+                .userResponseDto(userResponseDto)
+                .build();
     }
 }
