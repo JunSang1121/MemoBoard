@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserService {
         return userDto;
     }
 
-    @Transactional
     @Override
+    @Transactional
     public UserDto.saveUserInfoResponse saveUserInfo(UserDto.saveRequest userInfo){
 
         User user = User.builder()
