@@ -2,6 +2,7 @@ package com.jjs.memoboard.Domain;
 
 import com.jjs.memoboard.Domain.Base.BaseEntity;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,8 +21,14 @@ public class note extends BaseEntity implements Serializable {
     private Long id;
 
     @Column(name = "title")
-    private String titme;
+    private String title;
 
     @Column(name = "content")
     private String content;
+
+    @Builder
+    public note(String title, String content){
+        this.title=title;
+        this.content=content;
+    }
 }
