@@ -13,7 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Table(name = "note")
 @Entity
-public class note extends BaseEntity implements Serializable {
+public class Note extends BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +27,7 @@ public class note extends BaseEntity implements Serializable {
     private String content;
 
     @Builder
-    public note(String title, String content){
+    public Note(String title, String content){
         this.title=title;
         this.content=content;
     }
